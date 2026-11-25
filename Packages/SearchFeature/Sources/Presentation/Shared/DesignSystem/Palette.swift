@@ -28,4 +28,8 @@ enum Metrics {
     static let rowArtwork: CGFloat = 64
     /// Área táctil mínima recomendada por Apple.
     static let minTapTarget: CGFloat = 44
+    /// Ancho máximo de lectura cómodo en listas (horizontal, iPhone grandes).
+    static let readingWidth: CGFloat = 640
+    /// Lado máximo del artwork hero.
+    static let heroArtworkMax: CGFloat = 400
 }

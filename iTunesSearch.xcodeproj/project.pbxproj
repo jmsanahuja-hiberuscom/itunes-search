@@ -16,6 +16,7 @@
 		EB2D3766E98EA7A4C49B28BF /* iTunesSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757F77D19B27ADC45D144835 /* iTunesSearchUITests.swift */; };
 		F0639C309909B9775244197B /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA10D110B017EA8A95CF8A1 /* Presentation */; };
 		FEDA0D9C814B9A4754139096 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 49A41A6644BD61EF2C051F76 /* Data */; };
+		B1B2C3D4E5F60718293A4B5D /* InMemoryAlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		CC5B7B737E3E4A489F9D6F3A /* iTunesSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE7CBDE12447B1DDB5FA844 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF027A3E080921AC05726DA5 /* iTunesSearchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = iTunesSearchApp.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InMemoryAlbumRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				EF027A3E080921AC05726DA5 /* iTunesSearchApp.swift */,
 				5EE4C4D8A7B3C7E71C22F69E /* CompositionRoot.swift */,
+				A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */,
 				DBE7CBDE12447B1DDB5FA844 /* Assets.xcassets */,
 			);
 			name = App;
@@ -231,6 +234,7 @@
 			files = (
 				34B32FEF3C19A2A399F7EA49 /* iTunesSearchApp.swift in Sources */,
 				D6915CB21A31792D39E13F12 /* CompositionRoot.swift in Sources */,
+				B1B2C3D4E5F60718293A4B5D /* InMemoryAlbumRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
