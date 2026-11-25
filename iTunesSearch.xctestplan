@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "5B2C6F0A-1D3E-4A7B-9C41-7E8F0A1B2C01",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/SearchFeature",
+        "identifier" : "DomainTests",
+        "name" : "DomainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/SearchFeature",
+        "identifier" : "DataTests",
+        "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/SearchFeature",
+        "identifier" : "PresentationTests",
+        "name" : "PresentationTests"
+      }
+    }
+  ],
+  "version" : 1
+}
