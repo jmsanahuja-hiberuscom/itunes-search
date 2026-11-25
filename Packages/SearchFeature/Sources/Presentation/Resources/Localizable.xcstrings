@@ -77,6 +77,118 @@
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't load" } },
         "es" : { "stringUnit" : { "state" : "translated", "value" : "No se pudo cargar" } }
       }
+    },
+    "album.row.accessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shows album details" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Muestra el detalle del álbum" } }
+      }
+    },
+    "album.row.accessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$@, by %2$@" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "%1$@, de %2$@" } }
+      }
+    },
+    "detail.info.copyright" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copyright" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Copyright" } }
+      }
+    },
+    "detail.info.country" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Country" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "País" } }
+      }
+    },
+    "detail.info.price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Price" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Precio" } }
+      }
+    },
+    "detail.info.releaseDate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Release date" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Lanzamiento" } }
+      }
+    },
+    "detail.info.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Information" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Información" } }
+      }
+    },
+    "detail.openInAppleMusic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open in Apple Music" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Abrir en Apple Music" } }
+      }
+    },
+    "detail.tracks.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Songs" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Canciones" } }
+      }
+    },
+    "detail.trackCount %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "variations" : { "plural" : { "one" : { "stringUnit" : { "state" : "translated", "value" : "%lld song" } }, "other" : { "stringUnit" : { "state" : "translated", "value" : "%lld songs" } } } } },
+        "es" : { "variations" : { "plural" : { "one" : { "stringUnit" : { "state" : "translated", "value" : "%lld canción" } }, "other" : { "stringUnit" : { "state" : "translated", "value" : "%lld canciones" } } } } }
+      }
+    },
+    "search.prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Albums or artists" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Álbumes o artistas" } }
+      }
+    },
+    "search.suggestion.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Searches for this artist" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Busca a este artista" } }
+      }
+    },
+    "search.welcome.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search for an album or artist, or try one of these suggestions." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Busca un álbum o un artista, o prueba con una de estas sugerencias." } }
+      }
+    },
+    "search.welcome.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discover music" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Descubre música" } }
+      }
+    },
+    "skeleton.loading.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading details" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cargando detalle" } }
+      }
+    },
+    "track.accessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Track %1$lld, %2$@" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pista %1$lld, %2$@" } }
+      }
     }
   },
   "version" : "1.0"
