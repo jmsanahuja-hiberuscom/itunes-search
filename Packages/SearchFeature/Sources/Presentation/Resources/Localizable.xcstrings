@@ -49,6 +49,34 @@
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Search" } },
         "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar" } }
       }
+    },
+    "skeleton.loading.results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading results" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cargando resultados" } }
+      }
+    },
+    "state.error.retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Retry" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Reintentar" } }
+      }
+    },
+    "state.error.retry.alt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try again" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Volver a intentar" } }
+      }
+    },
+    "state.error.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't load" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No se pudo cargar" } }
+      }
     }
   },
   "version" : "1.0"
