@@ -1,7 +1,50 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "error.decoding" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "We received an unexpected response from the server." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hemos recibido una respuesta inesperada del servidor." } }
+      }
+    },
+    "error.network" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't connect. Check your connection and try again." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No se pudo conectar. Comprueba tu conexión e inténtalo de nuevo." } }
+      }
+    },
+    "error.notFound" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "We couldn't find what you were looking for." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No hemos encontrado lo que buscas." } }
+      }
+    },
+    "error.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Something went wrong." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ha ocurrido un error inesperado." } }
+      }
+    },
+    "search.announcement.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No results" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin resultados" } }
+      }
+    },
+    "search.announcement.results.one" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld result" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "%lld resultado" } }
+      }
+    },
+    "search.announcement.results.other" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld results" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "%lld resultados" } }
+      }
+    },
     "search.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Search" } },
         "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar" } }
