@@ -31,7 +31,14 @@ actor InMemoryCache<Key: Hashable & Sendable, Value: Sendable> {
         return entry.value
     }
 
+    /// Al insertar se purgan todas las entradas caducadas, para que las queries que
+    /// no se vuelven a pedir no se queden en memoria durante toda la sesión.
     func insert(_ value: Value, for key: Key) {
-        entries[key] = Entry(value: value, expiresAt: now().addingTimeInterval(ttl))
+        let current = now()
+        entries = entries.filter { current < $0.value.expiresAt }
+        entries[key] = Entry(value: value, expiresAt: current.addingTimeInterval(ttl))
     }
+
+    /// Número de entradas guardadas (las caducadas cuentan hasta que se purgan). Para tests.
+    var count: Int { entries.count }
 }

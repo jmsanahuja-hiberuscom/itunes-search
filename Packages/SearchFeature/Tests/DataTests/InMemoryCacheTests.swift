@@ -62,6 +62,22 @@ struct InMemoryCacheTests {
         #expect(await sut.value(for: "a") == nil)
     }
 
+    @Test func insertPurgesExpiredEntriesButKeepsValidOnes() async {
+        let (sut, clock) = makeSUT()
+        await sut.insert(1, for: "old")
+        clock.advance(by: 100)
+        await sut.insert(2, for: "recent")
+        clock.advance(by: 100) // «old» lleva 200 s (caducada), «recent» 100 s (válida)
+        #expect(await sut.count == 2)
+
+        await sut.insert(3, for: "new")
+
+        #expect(await sut.count == 2)
+        #expect(await sut.value(for: "old") == nil)
+        #expect(await sut.value(for: "recent") == 2)
+        #expect(await sut.value(for: "new") == 3)
+    }
+
     @Test func respectsCustomTTL() async {
         let (sut, clock) = makeSUT(ttl: 10)
         await sut.insert(1, for: "a")

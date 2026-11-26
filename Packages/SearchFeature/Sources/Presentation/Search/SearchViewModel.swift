@@ -37,6 +37,9 @@ public final class SearchViewModel {
             state = .idle
             return
         }
+        // Lo que haya en pantalla (resultados, vacío o error) es de un texto anterior:
+        // se descarta ya, sin esperar al debounce.
+        state = .loading
         searchTask = Task { [weak self] in
             await self?.performSearch(query: trimmed)
         }
@@ -52,7 +55,6 @@ public final class SearchViewModel {
             if debounce > .zero {
                 try await Task.sleep(for: debounce)
             }
-            state = .loading
             let albums = try await searchAlbums.execute(query: query)
             // Una búsqueda cancelada nunca puede pintar sus resultados,
             // aunque el use case los haya devuelto igualmente.
