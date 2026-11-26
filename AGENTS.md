@@ -1,6 +1,6 @@
 # iTunes Search · Agent guide
 
-Native iOS app built with **Swift 6 and SwiftUI** (iOS 17, iPhone only). It searches albums in the [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/) and shows their details. This is a technical assessment: clarity, layer separation, cancellation, caching and tests are what matter. Keep it simple; do not add features nobody asked for.
+Native iOS app built with **Swift 6 and SwiftUI** (iOS 17, iPhone and iPad). It searches albums in the [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/) and shows their details. This is a technical assessment: clarity, layer separation, cancellation, caching and tests are what matter. Keep it simple; do not add features nobody asked for.
 
 The user-facing explanation and the reasoning behind each decision live in [README.md](README.md); don't repeat it here.
 
@@ -34,6 +34,7 @@ Rules:
 - **UI:** SwiftUI only.
   - Colors, spacing and metrics come from the design system in `Presentation/Shared/DesignSystem`. No hardcoded colors or fixed font sizes.
   - Support Dynamic Type; don't fix screen frames.
+  - Adapt layouts with size classes (`horizontalSizeClass`, `verticalSizeClass`), not device models. iPad and iPhone share one adaptive layout.
   - User-facing text lives in `Localizable.xcstrings` (es and en), with `bundle: .module`. No hardcoded strings.
 - **Platform:** the package also compiles on macOS for `swift test`. Guard iOS-only APIs with `#if os(iOS)` or `#if canImport(UIKit)`.
 - **Test data:** only in tests and previews. The one exception is `-UITestMockData`, a launch argument that runs the app with fixed in-memory data and no network.

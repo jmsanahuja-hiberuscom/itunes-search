@@ -1,6 +1,6 @@
 # iTunes Search
 
-App iOS (SwiftUI, Swift 6, iOS 17, solo iPhone) para buscar álbumes y ver su detalle.
+App iOS (SwiftUI, Swift 6, iOS 17, iPhone e iPad) para buscar álbumes y ver su detalle.
 
 <img src="docs/images/search-empty.png" alt="Pantalla de búsqueda" width="240">
 
@@ -16,7 +16,7 @@ App iOS (SwiftUI, Swift 6, iOS 17, solo iPhone) para buscar álbumes y ver su de
 Requisitos: Xcode 16 o superior.
 
 1. Abrir `iTunesSearch.xcodeproj`.
-2. Elegir el esquema `iTunesSearch` y un simulador iPhone con iOS 17 o superior.
+2. Elegir el esquema `iTunesSearch` y un simulador iPhone o iPad con iOS 17 o superior.
 3. Run (`Cmd+R`).
 
 Para probar sin depender de la API, lanzar con el argumento `-UITestMockData` (en el esquema: Edit Scheme > Run > Arguments): usa datos locales.
@@ -58,3 +58,25 @@ Paquete local `Packages/SearchFeature` con tres targets, cada uno con su target 
 **Estados de pantalla.** Inicial, cargando, vacío, error (con reintento) y resultados, modelados con un único `ViewState`.
 
 **Accesibilidad y localización.** Dynamic Type hasta `accessibility5`, Reducir movimiento y VoiceOver; textos en español e inglés en un único String Catalog. La app no usa materiales ni transparencias, así que Reducir transparencia no tiene nada que adaptar.
+
+**iPad y pantallas grandes.** El layout se decide por clases de tamaño, no por modelo de dispositivo. La lista mantiene un ancho de lectura cómodo y centrado; el detalle pasa a dos columnas (carátula a la izquierda, información y canciones a la derecha) con ancho regular y en el iPhone apaisado, y vuelve a una sola columna con tamaños de texto de accesibilidad. En iPad el campo de búsqueda se fija bajo el título en lugar de flotar arriba a la derecha.
+
+## Fuera de alcance a propósito
+
+El enunciado pide una app sencilla. Estas cosas se valoraron y se dejaron fuera:
+
+- **Unificar peticiones idénticas en vuelo.** El view model cancela la búsqueda anterior en cada cambio y el debounce evita el solape, así que hay un solo consumidor. Compartir una tarea entre llamadas complicaría la cancelación: cancelar una podría cancelar la de otro.
+- **Límite de tamaño de la caché.** Solo se purgan las entradas caducadas al insertar. Con memoria y un TTL de 3 minutos no crece de forma relevante durante una sesión.
+- **Caché del detalle.** Se pide una vez por álbum; el enunciado habla de cachear la búsqueda.
+- **Paginación.** La búsqueda pide 25 resultados y el enunciado no pide más.
+- **Reintento automático y modo sin conexión.** Hay reintento manual desde la pantalla de error, pero no se reutiliza una caché caducada si falla la red.
+- **Tests de UI y CI.** Se construyeron y se retiraron por exceder el alcance. La lógica relevante (cancelación, caché, estados) está cubierta con tests unitarios deterministas.
+
+## Limitaciones conocidas
+
+- **iPhone Duo sin verificar.** Los layouts se basan en clases de tamaño y no se bloquea el redimensionado, así que debería funcionar, pero no se ha probado.
+- **Multitarea del iPad** (Split View y Slide Over) sin revisar. El iPad se ha comprobado a mano en vertical y apaisado.
+- **El layout de iPad no tiene tests automáticos.** Se comprueba con las previews y a mano en el simulador.
+- **Precios en dólares.** La petición no envía `country`, así que los precios y el país son los de la tienda de EE. UU.
+- **Sencillos como álbumes.** La API devuelve también sencillos y EPs dentro de `entity=album`; se muestran tal cual.
+- **La carátula en alta resolución** se obtiene sustituyendo `100x100` por `600x600` en la URL de Apple, por lo que depende de ese formato de URL.
