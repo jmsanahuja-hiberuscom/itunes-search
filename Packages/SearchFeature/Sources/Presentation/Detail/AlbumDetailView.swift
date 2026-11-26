@@ -5,6 +5,7 @@ import SwiftUI
 struct AlbumDetailView: View {
     @State private var viewModel: AlbumDetailViewModel
 
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -12,10 +13,16 @@ struct AlbumDetailView: View {
         _viewModel = State(initialValue: viewModel)
     }
 
+    /// Dos columnas cuando sobra espacio: iPhone en horizontal (alto compacto) o ancho regular (iPad).
+    private var usesTwoColumns: Bool {
+        (verticalSizeClass == .compact || horizontalSizeClass == .regular)
+            && !dynamicTypeSize.isAccessibilitySize
+    }
+
     var body: some View {
         Group {
-            // Con texto de accesibilidad, dos columnas en horizontal no caben: una sola columna.
-            if verticalSizeClass == .compact && !dynamicTypeSize.isAccessibilitySize {
+            // Con texto de accesibilidad, dos columnas no caben: una sola columna.
+            if usesTwoColumns {
                 landscapeLayout
             } else {
                 portraitLayout
@@ -294,6 +301,12 @@ private func previewDetail(
     previewDetail().environment(\.dynamicTypeSize, .accessibility3)
 }
 #Preview("Detalle · horizontal", traits: .landscapeLeft) { previewDetail() }
+#Preview("Detalle · iPad vertical", traits: .fixedLayout(width: 1032, height: 1376)) {
+    previewDetail().environment(\.horizontalSizeClass, .regular)
+}
+#Preview("Detalle · iPad horizontal", traits: .fixedLayout(width: 1376, height: 1032)) {
+    previewDetail().environment(\.horizontalSizeClass, .regular)
+}
 #Preview("Detalle · horizontal · accesibilidad 5", traits: .landscapeLeft) {
     previewDetail().environment(\.dynamicTypeSize, .accessibility5)
 }

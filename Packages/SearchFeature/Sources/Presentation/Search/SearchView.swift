@@ -1,5 +1,8 @@
 import Domain
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Pantalla de búsqueda. Sin lógica: pinta `viewModel.state` y delega los eventos.
 public struct SearchView: View {
@@ -23,7 +26,11 @@ public struct SearchView: View {
                 .frame(maxWidth: .infinity)
                 .motionSafeAnimation(value: viewModel.state)
                 .navigationTitle(Text("search.title", bundle: .module))
-                .searchable(text: $viewModel.query, prompt: Text("search.prompt", bundle: .module))
+                .searchable(
+                    text: $viewModel.query,
+                    placement: Self.searchPlacement,
+                    prompt: Text("search.prompt", bundle: .module)
+                )
                 .onChange(of: viewModel.query) { _, newValue in
                     viewModel.queryDidChange(newValue)
                 }
@@ -31,6 +38,16 @@ public struct SearchView: View {
                     AlbumDetailView(viewModel: makeDetailViewModel(album))
                 }
         }
+    }
+
+    /// En iPad la colocación por defecto es una pastilla arriba a la derecha, separada del título:
+    /// se fija bajo el título. En iPhone se deja la por defecto.
+    private static var searchPlacement: SearchFieldPlacement {
+        #if canImport(UIKit)
+        UIDevice.current.userInterfaceIdiom == .pad ? .navigationBarDrawer(displayMode: .always) : .automatic
+        #else
+        .automatic
+        #endif
     }
 
     @ViewBuilder
@@ -105,6 +122,9 @@ private func previewSearch(
     previewSearch(query: "bad").environment(\.dynamicTypeSize, .accessibility3)
 }
 #Preview("Resultados · horizontal", traits: .landscapeLeft) { previewSearch(query: "bad") }
+#Preview("Resultados · iPad", traits: .fixedLayout(width: 1032, height: 1376)) {
+    previewSearch(query: "bad").environment(\.horizontalSizeClass, .regular)
+}
 #Preview("Cargando") { previewSearch(query: "bad", useCase: PreviewNeverFinishes()) }
 #Preview("Vacío") { previewSearch(query: "zzz", useCase: PreviewSearchAlbums(result: .success([]))) }
 #Preview("Error") {
