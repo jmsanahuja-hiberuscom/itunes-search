@@ -90,6 +90,15 @@ struct SearchViewModelTests {
         #expect(await useCase.queries == ["rosalia"])
     }
 
+    @Test func innerWhitespaceIsCollapsedBeforeReachingUseCase() async {
+        let (viewModel, useCase, _) = makeSUT(results: [.success([.fixture()])])
+
+        viewModel.queryDidChange("the   beatles")
+        await viewModel.searchTask?.value
+
+        #expect(await useCase.queries == ["the beatles"])
+    }
+
     @Test func retryRepeatsSearchWithCurrentQuery() async {
         let albums = [Album.fixture()]
         let (viewModel, useCase, _) = makeSUT(results: [.failure(DomainError.network), .success(albums)])

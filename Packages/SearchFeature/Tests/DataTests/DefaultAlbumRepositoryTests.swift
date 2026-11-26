@@ -115,6 +115,17 @@ struct DefaultAlbumRepositoryCacheTests {
         #expect(await client.callCount == 1)
     }
 
+    @Test(arguments: ["the  beatles", " The\tBeatles ", "THE BEATLES\n"])
+    func innerWhitespaceAndCasingShareCache(_ variant: String) async throws {
+        let body = try Fixture.data("search")
+        let (sut, client, _) = makeSUT { _, _ in body }
+
+        _ = try await sut.searchAlbums(query: "the beatles")
+        _ = try await sut.searchAlbums(query: variant)
+
+        #expect(await client.callCount == 1)
+    }
+
     @Test func differentQueriesHitNetworkSeparately() async throws {
         let body = try Fixture.data("search")
         let (sut, client, _) = makeSUT { _, _ in body }

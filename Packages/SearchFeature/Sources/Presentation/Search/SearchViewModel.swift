@@ -31,8 +31,8 @@ public final class SearchViewModel {
     /// Query vacía → vuelve a `.idle` sin tocar el use case.
     public func queryDidChange(_ newQuery: String) {
         searchTask?.cancel()
-        let trimmed = newQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
+        let normalized = newQuery.normalizedSearchTerm
+        guard !normalized.isEmpty else {
             searchTask = nil
             state = .idle
             return
@@ -41,7 +41,7 @@ public final class SearchViewModel {
         // se descarta ya, sin esperar al debounce.
         state = .loading
         searchTask = Task { [weak self] in
-            await self?.performSearch(query: trimmed)
+            await self?.performSearch(query: normalized)
         }
     }
 

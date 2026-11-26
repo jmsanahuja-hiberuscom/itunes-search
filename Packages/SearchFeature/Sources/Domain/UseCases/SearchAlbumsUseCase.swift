@@ -12,10 +12,13 @@ public struct DefaultSearchAlbumsUseCase: SearchAlbumsUseCase {
     }
 
     public func execute(query: String) async throws -> [Album] {
-        // Regla de negocio: no se busca texto vacío.
-        let normalized = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Regla de negocio: no se busca texto vacío, y la query llega normalizada.
+        let normalized = query.normalizedSearchTerm
         guard !normalized.isEmpty else { return [] }
         // CancellationError y DomainError se propagan tal cual.
-        return try await repository.searchAlbums(query: normalized)
+        let albums = try await repository.searchAlbums(query: normalized)
+        // La API puede repetir un álbum: se conserva la primera aparición y el orden.
+        var seen = Set<Album.ID>()
+        return albums.filter { seen.insert($0.id).inserted }
     }
 }
