@@ -1,6 +1,6 @@
 # iTunes Search
 
-App iOS (SwiftUI, Swift 6, iOS 17, solo iPhone) para buscar álbumes y ver su detalle.
+App iOS (SwiftUI, Swift 6, iOS 17, iPhone e iPad) para buscar álbumes y ver su detalle.
 
 <img src="docs/images/search-empty.png" alt="Pantalla de búsqueda" width="240">
 
@@ -16,7 +16,7 @@ App iOS (SwiftUI, Swift 6, iOS 17, solo iPhone) para buscar álbumes y ver su de
 Requisitos: Xcode 16 o superior.
 
 1. Abrir `iTunesSearch.xcodeproj`.
-2. Elegir el esquema `iTunesSearch` y un simulador iPhone con iOS 17 o superior.
+2. Elegir el esquema `iTunesSearch` y un simulador iPhone o iPad con iOS 17 o superior.
 3. Run (`Cmd+R`).
 
 Para probar sin depender de la API, lanzar con el argumento `-UITestMockData` (en el esquema: Edit Scheme > Run > Arguments): usa datos locales.
@@ -58,3 +58,5 @@ Paquete local `Packages/SearchFeature` con tres targets, cada uno con su target 
 **Estados de pantalla.** Inicial, cargando, vacío, error (con reintento) y resultados, modelados con un único `ViewState`.
 
 **Accesibilidad y localización.** Dynamic Type hasta `accessibility5`, Reducir movimiento y VoiceOver; textos en español e inglés en un único String Catalog. La app no usa materiales ni transparencias, así que Reducir transparencia no tiene nada que adaptar.
+
+**iPad y pantallas grandes.** El layout se decide por clases de tamaño, no por modelo de dispositivo. La lista mantiene un ancho de lectura cómodo y centrado; el detalle pasa a dos columnas (carátula a la izquierda, información y canciones a la derecha) con ancho regular y en el iPhone apaisado, y vuelve a una sola columna con tamaños de texto de accesibilidad. En iPad el campo de búsqueda se fija bajo el título en lugar de flotar arriba a la derecha.
