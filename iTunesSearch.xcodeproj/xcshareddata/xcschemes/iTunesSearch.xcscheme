@@ -43,6 +43,9 @@
             reference = "container:iTunesSearch.xctestplan"
             default = "YES">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:iTunesSearchUITests.xctestplan">
+         </TestPlanReference>
       </TestPlans>
    </TestAction>
    <LaunchAction

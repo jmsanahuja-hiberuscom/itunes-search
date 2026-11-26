@@ -49,6 +49,7 @@ Every behavior change comes with a test. No network and no `sleep`: the cache cl
 | Domain       | Swift Testing with the repository mocked                                     |
 | Data         | Mock HTTP client and injected clock (cache use and expiry)                   |
 | Presentation | View models with fakes; deterministic cancellation test; localization check  |
+| UI           | XCTest with `-UITestMockData`: flow, accessibility audit, iPad layout        |
 
 ```bash
 # Domain and Data, no simulator
@@ -57,9 +58,13 @@ cd Packages/SearchFeature && swift test --filter "DomainTests|DataTests"
 # All unit tests (the simulator needs OS=18.6 on this Mac)
 xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
   -testPlan iTunesSearch -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.6'
+
+# UI tests (run them on an iPad simulator too: some tests only run there)
+xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
+  -testPlan iTunesSearchUITests -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.6'
 ```
 
-Before delivering: 0 warnings, and unit tests green also with `-test-iterations 5 -run-tests-until-failure`.
+Before delivering: 0 warnings, unit tests green also with `-test-iterations 5 -run-tests-until-failure`, and UI tests green on an iPhone and an iPad simulator.
 
 ## Branches and commits
 

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5B2C6F0A-1D3E-4A7B-9C41-7E8F0A1B2C02",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iTunesSearch.xcodeproj",
+        "identifier" : "CAC3377F8F17BE7F209B4F73",
+        "name" : "iTunesSearchUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

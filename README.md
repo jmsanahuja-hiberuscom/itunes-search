@@ -30,9 +30,15 @@ cd Packages/SearchFeature && swift test --filter "DomainTests|DataTests"
 # Todos los tests unitarios (plan iTunesSearch)
 xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
   -testPlan iTunesSearch -destination 'platform=iOS Simulator,name=iPhone 16'
+
+# Tests de UI (plan iTunesSearchUITests); en iPad se ejecutan además los específicos de iPad
+xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
+  -testPlan iTunesSearchUITests -destination 'platform=iOS Simulator,name=iPhone 16'
 ```
 
 Los tests unitarios no usan red ni `sleep`: el reloj de la caché y el debounce se inyectan.
+
+Los tests de UI (XCTest) arrancan la app con `-UITestMockData`, sin red. Cubren el flujo búsqueda → detalle → volver (también con texto grande), la auditoría de accesibilidad de Apple en búsqueda y detalle, y en iPad el detalle a dos columnas y el campo de búsqueda fijado bajo el título.
 
 ## Arquitectura
 
@@ -70,13 +76,13 @@ El enunciado pide una app sencilla. Estas cosas se valoraron y se dejaron fuera:
 - **Caché del detalle.** Se pide una vez por álbum; el enunciado habla de cachear la búsqueda.
 - **Paginación.** La búsqueda pide 25 resultados y el enunciado no pide más.
 - **Reintento automático y modo sin conexión.** Hay reintento manual desde la pantalla de error, pero no se reutiliza una caché caducada si falla la red.
-- **Tests de UI y CI.** Se construyeron y se retiraron por exceder el alcance. La lógica relevante (cancelación, caché, estados) está cubierta con tests unitarios deterministas.
+- **CI.** Se construyó y se retiró por exceder el alcance. Los tests se ejecutan en local con los comandos de arriba.
 
 ## Limitaciones conocidas
 
 - **iPhone Duo sin verificar.** Los layouts se basan en clases de tamaño y no se bloquea el redimensionado, así que debería funcionar, pero no se ha probado.
-- **Multitarea del iPad** (Split View y Slide Over) sin revisar. El iPad se ha comprobado a mano en vertical y apaisado.
-- **El layout de iPad no tiene tests automáticos.** Se comprueba con las previews y a mano en el simulador.
+- **Multitarea del iPad** (Split View y Slide Over) sin revisar. El iPad se ha comprobado a mano y con tests de UI en vertical; el apaisado solo a mano.
+- **La auditoría de accesibilidad exime dos avisos de controles del sistema** que la app no controla: el área pequeña del botón de borrar texto del campo de búsqueda y el veredicto límite "Contrast nearly passed" de los colores semánticos. Cualquier otro aviso hace fallar el test. La auditoría depende de la versión de iOS del simulador.
 - **Precios en dólares.** La petición no envía `country`, así que los precios y el país son los de la tienda de EE. UU.
 - **Sencillos como álbumes.** La API devuelve también sencillos y EPs dentro de `entity=album`; se muestran tal cual.
 - **La carátula en alta resolución** se obtiene sustituyendo `100x100` por `600x600` en la URL de Apple, por lo que depende de ese formato de URL.
