@@ -19,7 +19,7 @@ Requisitos: Xcode 16 o superior.
 2. Elegir el esquema `iTunesSearch` y un simulador iPhone con iOS 17 o superior.
 3. Run (`Cmd+R`).
 
-Sin red (o para probar sin depender de la API), lanzar con el argumento `-UITestMockData`: usa datos locales.
+Para probar sin depender de la API, lanzar con el argumento `-UITestMockData` (en el esquema: Edit Scheme > Run > Arguments): usa datos locales.
 
 ## Tests
 
@@ -30,10 +30,6 @@ cd Packages/SearchFeature && swift test --filter "DomainTests|DataTests"
 # Todos los tests unitarios (plan iTunesSearch)
 xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
   -testPlan iTunesSearch -destination 'platform=iOS Simulator,name=iPhone 16'
-
-# UI tests, en local
-xcodebuild test -project iTunesSearch.xcodeproj -scheme iTunesSearch \
-  -testPlan iTunesSearchUITests -destination 'platform=iOS Simulator,name=iPhone 16'
 ```
 
 Los tests unitarios no usan red ni `sleep`: el reloj de la caché y el debounce se inyectan.
