@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34B32FEF3C19A2A399F7EA49 /* iTunesSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF027A3E080921AC05726DA5 /* iTunesSearchApp.swift */; };
+		B1B2C3D4E5F60718293A4B62 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B61 /* InfoPlist.xcstrings */; };
 		4D605429CA4330F0AE7C2419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE7CBDE12447B1DDB5FA844 /* Assets.xcassets */; };
 		5E135193D9913EFEE48960D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80482DE4B05114E01EC2E99F /* Foundation.framework */; };
 		87D48C926BF52BD22E79BE5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80482DE4B05114E01EC2E99F /* Foundation.framework */; };
@@ -17,6 +18,7 @@
 		F0639C309909B9775244197B /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA10D110B017EA8A95CF8A1 /* Presentation */; };
 		FEDA0D9C814B9A4754139096 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 49A41A6644BD61EF2C051F76 /* Data */; };
 		B1B2C3D4E5F60718293A4B5D /* InMemoryAlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */; };
+		B1B2C3D4E5F60718293A4B60 /* FailingAlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5F /* FailingAlbumRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +40,11 @@
 		757F77D19B27ADC45D144835 /* iTunesSearchUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = iTunesSearchUITests.swift; sourceTree = "<group>"; };
 		80482DE4B05114E01EC2E99F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CC5B7B737E3E4A489F9D6F3A /* iTunesSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60718293A4B61 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		DBE7CBDE12447B1DDB5FA844 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF027A3E080921AC05726DA5 /* iTunesSearchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = iTunesSearchApp.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InMemoryAlbumRepository.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5F /* FailingAlbumRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FailingAlbumRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +92,9 @@
 				EF027A3E080921AC05726DA5 /* iTunesSearchApp.swift */,
 				5EE4C4D8A7B3C7E71C22F69E /* CompositionRoot.swift */,
 				A1B2C3D4E5F60718293A4B5C /* InMemoryAlbumRepository.swift */,
+				A1B2C3D4E5F60718293A4B5F /* FailingAlbumRepository.swift */,
 				DBE7CBDE12447B1DDB5FA844 /* Assets.xcassets */,
+				A1B2C3D4E5F60718293A4B61 /* InfoPlist.xcstrings */,
 			);
 			name = App;
 			path = App;
@@ -183,6 +189,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 				Base,
 			);
 			mainGroup = AD4A2EB34AA9E30CCB8BBF9C;
@@ -207,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D605429CA4330F0AE7C2419 /* Assets.xcassets in Resources */,
+				B1B2C3D4E5F60718293A4B62 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +243,7 @@
 				34B32FEF3C19A2A399F7EA49 /* iTunesSearchApp.swift in Sources */,
 				D6915CB21A31792D39E13F12 /* CompositionRoot.swift in Sources */,
 				B1B2C3D4E5F60718293A4B5D /* InMemoryAlbumRepository.swift in Sources */,
+				B1B2C3D4E5F60718293A4B60 /* FailingAlbumRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

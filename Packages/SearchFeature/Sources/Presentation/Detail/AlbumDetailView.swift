@@ -6,6 +6,7 @@ struct AlbumDetailView: View {
     @State private var viewModel: AlbumDetailViewModel
 
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(viewModel: AlbumDetailViewModel) {
         _viewModel = State(initialValue: viewModel)
@@ -13,7 +14,8 @@ struct AlbumDetailView: View {
 
     var body: some View {
         Group {
-            if verticalSizeClass == .compact {
+            // Con texto de accesibilidad, dos columnas en horizontal no caben: una sola columna.
+            if verticalSizeClass == .compact && !dynamicTypeSize.isAccessibilitySize {
                 landscapeLayout
             } else {
                 portraitLayout
@@ -199,26 +201,61 @@ private struct TracksSection: View {
                 SectionHeader(title: "detail.tracks.title")
                 VStack(alignment: .leading, spacing: Spacing.s) {
                     ForEach(tracks) { track in
-                        HStack(alignment: .firstTextBaseline, spacing: Spacing.s) {
-                            Text(track.number, format: .number)
-                                .foregroundStyle(.secondary)
-                                .monospacedDigit()
-                                .frame(minWidth: numberWidth, alignment: .trailing)
-                            Text(track.name)
-                            Spacer(minLength: Spacing.xs)
-                            if let duration = track.duration {
-                                Text(Formatting.duration(duration))
-                                    .foregroundStyle(.secondary)
-                                    .monospacedDigit()
-                            }
-                        }
-                        .font(.body)
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel(Formatting.trackAccessibilityLabel(for: track))
+                        TrackRow(track: track, numberWidth: numberWidth)
                     }
                 }
                 .cardStyle()
             }
+        }
+    }
+}
+
+/// Fila de canción. Con tamaños de accesibilidad la duración pasa debajo del título
+/// para que ninguno de los dos se trunque.
+private struct TrackRow: View {
+    let track: Track
+    let numberWidth: CGFloat
+
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: Spacing.xxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: Spacing.s) {
+                        number
+                        Text(track.name)
+                    }
+                    duration
+                }
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: Spacing.s) {
+                    number
+                    Text(track.name)
+                    Spacer(minLength: Spacing.xs)
+                    duration
+                }
+            }
+        }
+        .font(.body)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Formatting.trackAccessibilityLabel(for: track))
+    }
+
+    private var number: some View {
+        Text(track.number, format: .number)
+            .foregroundStyle(.secondary)
+            .monospacedDigit()
+            .frame(minWidth: numberWidth, alignment: .trailing)
+    }
+
+    @ViewBuilder
+    private var duration: some View {
+        if let duration = track.duration {
+            Text(Formatting.duration(duration))
+                .foregroundStyle(.secondary)
+                .monospacedDigit()
         }
     }
 }
@@ -257,6 +294,12 @@ private func previewDetail(
     previewDetail().environment(\.dynamicTypeSize, .accessibility3)
 }
 #Preview("Detalle · horizontal", traits: .landscapeLeft) { previewDetail() }
+#Preview("Detalle · horizontal · accesibilidad 5", traits: .landscapeLeft) {
+    previewDetail().environment(\.dynamicTypeSize, .accessibility5)
+}
+#Preview("Detalle · oscuro · accesibilidad 5") {
+    previewDetail().preferredColorScheme(.dark).environment(\.dynamicTypeSize, .accessibility5)
+}
 #Preview("Detalle · cargando") { previewDetail(useCase: PreviewNeverFinishes()) }
 #Preview("Detalle · error") {
     previewDetail(useCase: PreviewGetAlbumDetail(result: .failure(.network)))
