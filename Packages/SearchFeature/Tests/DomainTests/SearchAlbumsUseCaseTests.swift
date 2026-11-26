@@ -32,6 +32,27 @@ struct SearchAlbumsUseCaseTests {
         #expect(await repository.searchQueries == ["Radiohead"])
     }
 
+    @Test func innerWhitespaceIsCollapsedBeforeReachingRepository() async throws {
+        let repository = MockAlbumRepository()
+        let sut = DefaultSearchAlbumsUseCase(repository: repository)
+
+        _ = try await sut.execute(query: " the   beatles\t ")
+
+        #expect(await repository.searchQueries == ["the beatles"])
+    }
+
+    @Test func duplicatedAlbumsAreRemovedKeepingFirstOccurrenceAndOrder() async throws {
+        let first = Album.fixture(id: 1, title: "A")
+        let second = Album.fixture(id: 2, title: "B")
+        let repeated = Album.fixture(id: 1, title: "A (repetido)")
+        let repository = MockAlbumRepository(searchResult: .success([first, second, repeated]))
+        let sut = DefaultSearchAlbumsUseCase(repository: repository)
+
+        let result = try await sut.execute(query: "rosalía")
+
+        #expect(result == [first, second])
+    }
+
     @Test func repositoryErrorIsPropagated() async {
         let repository = MockAlbumRepository(searchResult: .failure(DomainError.network))
         let sut = DefaultSearchAlbumsUseCase(repository: repository)

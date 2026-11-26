@@ -16,7 +16,7 @@ public struct DefaultAlbumRepository: AlbumRepository {
 
     public func searchAlbums(query: String) async throws -> [Album] {
         // La clave se normaliza; a la API se le envía el término tal cual.
-        let key = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let key = query.normalizedSearchTerm.lowercased()
         if let cached = await searchCache.value(for: key) {
             return cached
         }
