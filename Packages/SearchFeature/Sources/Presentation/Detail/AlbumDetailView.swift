@@ -129,6 +129,7 @@ private struct AlbumHero: View {
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity)
             .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("album-hero")
         }
     }
 }
