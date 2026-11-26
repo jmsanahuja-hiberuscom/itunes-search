@@ -1,0 +1,12 @@
+import Foundation
+import Testing
+
+enum Fixture {
+    static func data(_ name: String) throws -> Data {
+        let url = try #require(
+            Bundle.module.url(forResource: name, withExtension: "json"),
+            "Fixture \(name).json not found in test bundle"
+        )
+        return try Data(contentsOf: url)
+    }
+}

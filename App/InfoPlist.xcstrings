@@ -1,0 +1,12 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "iTunes Search" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscador iTunes" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
