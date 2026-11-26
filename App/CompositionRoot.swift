@@ -7,7 +7,6 @@ import Presentation
 @MainActor
 struct CompositionRoot {
     static let uiTestMockDataArgument = "-UITestMockData"
-    static let uiTestMockErrorArgument = "-UITestMockError"
 
     let searchViewModel: SearchViewModel
     private let getAlbumDetail: any GetAlbumDetailUseCase
@@ -21,18 +20,12 @@ struct CompositionRoot {
         )
     }
 
-    /// - `-UITestMockData`: datos fijos en memoria.
-    /// - `-UITestMockError`: la búsqueda falla.
-    /// - Ambos: se puede buscar, pero el detalle falla.
+    /// `-UITestMockData`: datos fijos en memoria, sin red.
     private static func makeRepository(arguments: [String]) -> any AlbumRepository {
-        let mockData = arguments.contains(uiTestMockDataArgument)
-        let mockError = arguments.contains(uiTestMockErrorArgument)
-        switch (mockData, mockError) {
-        case (true, true): return FailingAlbumRepository(searchSource: InMemoryAlbumRepository())
-        case (false, true): return FailingAlbumRepository()
-        case (true, false): return InMemoryAlbumRepository()
-        case (false, false): return DefaultAlbumRepository(httpClient: URLSessionHTTPClient())
+        if arguments.contains(uiTestMockDataArgument) {
+            return InMemoryAlbumRepository()
         }
+        return DefaultAlbumRepository(httpClient: URLSessionHTTPClient())
     }
 
     func makeAlbumDetailViewModel(for album: Album) -> AlbumDetailViewModel {

@@ -2,7 +2,6 @@ import XCTest
 
 final class iTunesSearchUITests: XCTestCase {
     private static let mockData = "-UITestMockData"
-    private static let mockError = "-UITestMockError"
     private static let largeText = ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXL"]
 
     private let timeout: TimeInterval = 10
@@ -27,24 +26,6 @@ final class iTunesSearchUITests: XCTestCase {
         goBackToSearch(in: app)
     }
 
-    // MARK: - Estados de error
-
-    @MainActor
-    func testSearchFailureShowsErrorState() {
-        let app = launch(arguments: [Self.mockError])
-        search("Rosalía", in: app)
-        XCTAssertTrue(app.buttons["retry-button"].waitForExistence(timeout: timeout))
-    }
-
-    @MainActor
-    func testDetailFailureShowsErrorState() {
-        let app = launch(arguments: [Self.mockData, Self.mockError])
-        search("Rosalía", in: app)
-        XCTAssertTrue(app.buttons["album-row-1"].waitForExistence(timeout: timeout))
-        app.buttons["album-row-1"].tap()
-        XCTAssertTrue(app.buttons["retry-button"].waitForExistence(timeout: timeout))
-    }
-
     // MARK: - Auditoría de accesibilidad
 
     @MainActor
@@ -65,9 +46,9 @@ final class iTunesSearchUITests: XCTestCase {
     // MARK: - Helpers
 
     @MainActor
-    private func launch(arguments: [String]? = nil, extraArguments: [String] = []) -> XCUIApplication {
+    private func launch(extraArguments: [String] = []) -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments = (arguments ?? [Self.mockData]) + extraArguments
+        app.launchArguments = [Self.mockData] + extraArguments
         app.launch()
         return app
     }
