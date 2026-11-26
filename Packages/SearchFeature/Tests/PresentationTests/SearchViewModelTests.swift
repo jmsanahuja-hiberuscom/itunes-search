@@ -127,6 +127,35 @@ struct SearchViewModelTests {
         #expect(await useCase.queries.isEmpty)
     }
 
+    @Test func changingTextDropsPreviousResultsImmediately() async {
+        let albums = [Album.fixture(id: 1)]
+        let (viewModel, _, _) = makeSUT(results: [.success(albums), .success([])])
+
+        viewModel.queryDidChange("a")
+        await viewModel.searchTask?.value
+        #expect(viewModel.state == .loaded(albums))
+
+        // Sin esperar a la nueva tarea: los resultados de «a» ya no pueden verse junto a «b».
+        viewModel.queryDidChange("b")
+        #expect(viewModel.state == .loading)
+        await viewModel.searchTask?.value
+    }
+
+    @Test func changingTextDropsPreviousErrorImmediately() async {
+        let (viewModel, _, _) = makeSUT(results: [.failure(DomainError.network), .success([])])
+
+        viewModel.queryDidChange("a")
+        await viewModel.searchTask?.value
+        guard case .failed = viewModel.state else {
+            Issue.record("Se esperaba .failed")
+            return
+        }
+
+        viewModel.queryDidChange("b")
+        #expect(viewModel.state == .loading)
+        await viewModel.searchTask?.value
+    }
+
     // MARK: - Accesibilidad
 
     @Test(arguments: [1, 25])
